@@ -6,9 +6,12 @@ with final.pkgs.lib; let
   mkNeovim = pkgs.callPackage ./mkNeovim.nix { inherit pkgs-wrapNeovim; };
 
   plugins = with pkgs.vimPlugins; [
+    nvim-lspconfig
     gruvbox-nvim
     tokyonight-nvim
     everforest
+
+    neodev-nvim
 
     oil-nvim
     undotree
@@ -50,6 +53,10 @@ with final.pkgs.lib; let
 
   extraPackages = with pkgs; [
     # LSP
+    cargo
+    rust-analyzer
+    rustfmt
+
     lua-language-server
     nil
   ];
