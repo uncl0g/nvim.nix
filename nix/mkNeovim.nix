@@ -59,8 +59,6 @@ with lib;
       '';
 
       installPhase = ''
-        cp -r after $out/after
-        rm -r after
         cp -r lua $out/lua
         rm -r lua
         cp -r * $out/nvim
@@ -94,7 +92,6 @@ with lib;
       )
       + ''
         vim.opt.rtp:prepend('${nvimRtp}/nvim')
-        vim.opt.rtp:prepend('${nvimRtp}/after')
       '';
 
     extraMakeWrapperArgs = builtins.concatStringsSep " " (
@@ -128,13 +125,5 @@ with lib;
           + extraMakeWrapperLuaArgs;
         wrapRc = true;
       });
-
-    isCustomAppName = appName != null && appName != "nvim";
   in
-    neovim-wrapped.overrideAttrs (oa: {
-      buildPhase =
-        oa.buildPhase
-        + lib.optionalString isCustomAppName ''
-          mv $out/bin/nvim $out/bin/${lib.escapeShellArg appName}
-        '';
-    })
+    neovim-wrapped
