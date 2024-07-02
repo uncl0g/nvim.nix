@@ -1,7 +1,6 @@
 { pkgs, lib, stdenv, pkgs-wrapNeovim ? pkgs }:
 with lib;
   {
-    appName ? null,
     neovim-unwrapped ? pkgs-wrapNeovim.neovim-unwrapped,
     plugins ? [],
     devPlugins ? [],
@@ -95,9 +94,7 @@ with lib;
       '';
 
     extraMakeWrapperArgs = builtins.concatStringsSep " " (
-      (optional (appName != "nvim" && appName != null && appName != "")
-        ''--set NVIM_APPNAME "${appName}"'')
-      ++ (optional (extraPackages != [])
+      (optional (extraPackages != [])
         ''--prefix PATH : "${makeBinPath extraPackages}"'')
     );
 
