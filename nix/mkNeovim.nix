@@ -108,8 +108,8 @@ with lib;
     extraMakeWrapperLuaArgs =
       optionalString (resolvedExtraLuaPackages != [])
       ''--suffix LUA_PATH ";" "${concatMapStringsSep ";" luaPackages.getLuaPath resolvedExtraLuaPackages}"'';
-
-    neovim-wrapped = pkgs-wrapNeovim.wrapNeovimUnstable neovim-unwrapped (neovimConfig
+  in
+    pkgs-wrapNeovim.wrapNeovimUnstable neovim-unwrapped (neovimConfig
       // {
         luaRcContent = initLua;
         wrapperArgs =
@@ -121,6 +121,4 @@ with lib;
           + " "
           + extraMakeWrapperLuaArgs;
         wrapRc = true;
-      });
-  in
-    neovim-wrapped
+      })

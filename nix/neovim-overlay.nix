@@ -6,21 +6,22 @@ with final.pkgs.lib; let
   mkNeovim = pkgs.callPackage ./mkNeovim.nix { inherit pkgs-wrapNeovim; };
 
   plugins = with pkgs.vimPlugins; [
-    nvim-lspconfig
+    # Themes
     gruvbox-nvim
     tokyonight-nvim
-    everforest
 
+    # LSP
+    nvim-lspconfig
     neodev-nvim
 
     oil-nvim
     undotree
 
     nvim-treesitter.withAllGrammars
-    luasnip
 
     # Autocompletion
     nvim-cmp
+    luasnip
     cmp-nvim-lsp
     cmp_luasnip
     cmp-buffer
@@ -37,32 +38,24 @@ with final.pkgs.lib; let
     telescope-nvim
     telescope-fzy-native-nvim
 
-    # UI
-    nvim-treesitter-context # nvim-treesitter-context
-
-    # Navigation
-    nvim-treesitter-textobjects # https://github.com/nvim-treesitter/nvim-treesitter-textobjects/
-    nvim-ts-context-commentstring # https://github.com/joosepalviste/nvim-ts-context-commentstring/
-
     # libraries that other plugins depend on
-    sqlite-lua
     plenary-nvim
     nvim-web-devicons
-    vim-repeat
   ];
 
   extraPackages = with pkgs; [
-    # LSP
+    # Rust
     cargo
     rust-analyzer
     rustfmt
 
+    # Lua
     lua-language-server
+
+    # Nix
     nil
+    nixfmt-classic
   ];
 in {
-  nvim-pkg = mkNeovim {
-    plugins = plugins;
-    inherit extraPackages;
-  };
+  nvim-pkg = mkNeovim { inherit plugins extraPackages; };
 }

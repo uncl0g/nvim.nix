@@ -1,7 +1,7 @@
-if vim.g.did_load_lspconfig_plugin then
+if vim.g.did_load_lsp_plugins then
   return
 end
-vim.g.did_load_lspconfig_plugin = true
+vim.g.did_load_lsp_plugins = true
 
 require("neodev").setup {}
 
