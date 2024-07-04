@@ -20,9 +20,6 @@ cmp.setup {
     { name = 'luasnip' },
     { name = 'path' },
   },
-  experimental = {
-    ghost_text = true,
-  },
 }
 
 cmp.setup.filetype('lua', {
