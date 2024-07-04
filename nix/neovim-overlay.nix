@@ -42,17 +42,8 @@ with final.pkgs.lib; let
   ];
 
   extraPackages = with pkgs; [
-    # Rust
-    cargo
-    rust-analyzer
-    rustfmt
-
-    # Lua
     lua-language-server
-
-    # Nix
     nil
-    nixfmt-classic
   ];
 in {
   nvim-pkg = mkNeovim { inherit plugins extraPackages; };
