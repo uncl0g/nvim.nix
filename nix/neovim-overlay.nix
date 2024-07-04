@@ -8,7 +8,6 @@ with final.pkgs.lib; let
   plugins = with pkgs.vimPlugins; [
     # Themes
     gruvbox-nvim
-    tokyonight-nvim
 
     # LSP
     nvim-lspconfig
@@ -27,8 +26,7 @@ with final.pkgs.lib; let
     cmp-buffer
     cmp-path
     cmp-nvim-lua
-    cmp-cmdline # cmp command line suggestions
-    cmp-cmdline-history # cmp command line history suggestions
+    cmp-cmdline
 
     # Git
     gitsigns-nvim
